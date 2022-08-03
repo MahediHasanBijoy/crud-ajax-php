@@ -35,6 +35,9 @@
 			</div>
 		</div>
 		<div class="col-md-7 ms-5 mt-5" id="data">
+			<h2 class="text-center">Users List</h2>
+			<div id="actionmsg"></div>
+			<div class="output"></div>
 
 		</div>
 	</div>

@@ -5,21 +5,12 @@ $(document).ready(function(){
 	$("#submit").click(function(){
 		insert();
 	});
-
-
-
-	// $("#delete").click(function(){
-	// 	console.log('clicked');
-	// 	deletedata();
-	// });
-
-	// called delete from html cause this method above does'nt working some unknown reason
-
 	
 
 });
 
 
+// insert request
 function insert(){
 		var methodName = "insert";
 		var fName = $("#fName").val();
@@ -51,7 +42,7 @@ function insert(){
 		});
 	}
 
-
+	// show request
 	function show(){
 		var methodName = "show";
 		$.ajax({
@@ -61,16 +52,16 @@ function insert(){
 				methodName: methodName	
 			},
 			success:function(result){
-				$("#data").html(result);
+				$(".output").html(result);
 			}
 		});
 	}
 
+	// delete request
+	function deletedata(id){
 
-	function deletedata(){
 		var methodName = "delete";
-		var id = $("#delete").val();
-		console.log(id);
+
 		$.ajax({
 			url:'process.php',
 			method: 'POST',
@@ -79,11 +70,70 @@ function insert(){
 				id: id
 			},
 			success:function(result){
-				$(".msg").html(result);
 				show();
-				$(".msg").fadeOut(1000);
+				$("#actionmsg").html(result);
+				
+				$(".modal").modal("hide");
+				$("#actionmsg").fadeOut(1000);
+
 			}
 		});
 	}
 
+	// update request
+	function update(id){
+		var methodName = "update";
 
+		var fName = $(".fName"+id).val();
+		var uName = $(".uName"+id).val();
+		var email = $(".email"+id).val();
+		var status = $(".status"+id).val();
+		console.log(email);
+		console.log(status);
+
+		$.ajax({
+			url:'process.php',
+			method: 'POST',
+			data:{
+				methodName: methodName,
+				id:id,
+				fName: fName,
+				uName: uName,
+				email: email,
+				status: status
+			},
+			success:function(result){
+				$("#actionmsg").html(result);
+
+				$("#actionmsg").fadeOut(1000);
+				
+				$(".modal").modal("hide");
+
+				show();
+			}
+		});
+
+	}
+
+
+
+function changeStatus(id){
+	var methodName = "changeStatus";
+	$.ajax({
+		url:'process.php',
+		method: 'POST',
+		data:{
+			methodName: methodName,
+			id:id
+		},
+		success:function(result){
+			$("#actionmsg").html(result);
+
+			$(".alert").fadeOut(1000);
+			
+			$(".modal").modal("hide");
+
+			show();
+		}
+	});
+}
