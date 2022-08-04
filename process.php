@@ -46,6 +46,7 @@ function show(){
 				</tr>';
 
 		while($data = $result->fetch_assoc()){
+			
 			if($data['status']=='1'){
 				$status = '<button class="btn btn-info btn-sm w-75" data-bs-toggle="modal" data-bs-target="#status'.$data["id"].'">Active</button>';
 			}else{

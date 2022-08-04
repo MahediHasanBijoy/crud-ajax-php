@@ -116,24 +116,24 @@ function insert(){
 	}
 
 
+	// changing status request
+	function changeStatus(id){
+		var methodName = "changeStatus";
+		$.ajax({
+			url:'process.php',
+			method: 'POST',
+			data:{
+				methodName: methodName,
+				id:id
+			},
+			success:function(result){
+				$("#actionmsg").html(result);
 
-function changeStatus(id){
-	var methodName = "changeStatus";
-	$.ajax({
-		url:'process.php',
-		method: 'POST',
-		data:{
-			methodName: methodName,
-			id:id
-		},
-		success:function(result){
-			$("#actionmsg").html(result);
+				$(".alert").fadeOut(1000);
+				
+				$(".modal").modal("hide");
 
-			$(".alert").fadeOut(1000);
-			
-			$(".modal").modal("hide");
-
-			show();
-		}
-	});
-}
+				show();
+			}
+		});
+	}
